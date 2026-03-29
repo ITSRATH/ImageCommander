@@ -7,6 +7,125 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid ShowGridLines="False" >
+            <!-- MainGrid -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Menu VerticalAlignment="Top" Grid.Row="0">
+                <MenuItem Header="_Menü">
+                    <MenuItem Header="_Einstellung öffnen (Bald verfügbar)" IsEnabled="False"/>
+                    <MenuItem Header="_Einstellung Speichern (Bald verfügbar)" IsEnabled="False"/>
+                    <MenuItem Header="_Verlassen (Bald verfügbar)" IsEnabled="False"/>
+                </MenuItem>
+                <MenuItem Header="_Ansicht">
+                    <MenuItem Header="_Themes (Bald verfügbar)" IsEnabled="False"/>
+                </MenuItem>
+            </Menu>
+            <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1"/>
+            <Grid Grid.Row="1" Background="#f5f5f5" ShowGridLines="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Settings:" Grid.Column="1" Grid.Row="0" Margin="10" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center" Margin="5">
+                    <Label Content="Konvertiere zu"/>
+                    <ComboBox SelectedIndex="0" x:Name="TypeConvertionTo" >
+                        <ComboBoxItem Content="JPG"/>
+                        <ComboBoxItem Content="PNG"/>
+                        <ComboBoxItem Content="WebP"/>
+                        <ComboBoxItem Content="BMP"/>
+                        <ComboBoxItem Content="TIFF"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center" Margin="5">
+                    <Label Content="Bild Qualität" HorizontalAlignment="Left"/>
+                    <ComboBox SelectedIndex="0" HorizontalAlignment="Left" x:Name="qualitySelection" >
+                        <ComboBoxItem Content="100% (Original)"/>
+                        <ComboBoxItem Content="75%"/>
+                        <ComboBoxItem Content="50%"/>
+                        <ComboBoxItem Content="25%"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Column="4" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Umbennenen?"/>
+                        <RadioButton Content="Ja" VerticalAlignment="Center" GroupName="setRename" x:Name="renameActive"/>
+                        <RadioButton Content="Nein" VerticalAlignment="Center" Margin="10,0,10,0" IsChecked="True" GroupName="setRename"/>
+                    </StackPanel>
+                    <TextBox x:Name="renameText"/>
+                </StackPanel>
+                <StackPanel Grid.Column="5" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center" Margin="5">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Meta Daten löschen?"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <RadioButton Content="Ja" VerticalAlignment="Center" GroupName="setRemoveMeta" x:Name="removeMetadata"/>
+                            <RadioButton Content="Nein" VerticalAlignment="Center" Margin="10,0,10,0" IsChecked="True" GroupName="setRemoveMeta"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1"/>
+            <Grid Grid.Row="2" ShowGridLines="False">
+                <!-- Main Content-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Column="0" Grid.RowSpan="3" BorderBrush="Gray" BorderThickness="1"/>
+                <Border Grid.ColumnSpan="2" Grid.Row="0" BorderThickness="1" BorderBrush="Gray"/>
+                <StackPanel Grid.Column="0" Grid.Row="0" Margin="10,0" Orientation="Horizontal">
+                    <Label Content="Quellordner:"/>
+                    <TextBox Width="200" x:Name="sourceFolderPath" VerticalAlignment="Center"/>
+                    <Button Content="Durchsuchen" Margin="5,0,0,0" Click="BrowseSourceFolder_Click" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="0" Margin="10,0" Orientation="Horizontal">
+                    <Label Content="Zielordner:"/>
+                    <TextBox Width="200" x:Name="destinationFolderPath" VerticalAlignment="Center"/>
+                    <Button Content="Durchsuchen" Margin="5,0,0,0" Click="BrowseDestinationFolder_Click" VerticalAlignment="Center"/>
+                </StackPanel>
+                <ListView x:Name="lvFiles" Grid.Column="0" Grid.Row="1" Margin="5">
+                    <ListView.View>
+                        <GridView>
+                            <!-- Spalte 1: Checkbox links -->
+                            <GridViewColumn Width="40">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected}" Margin="5,0"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!-- Spalte 2: Dateiname -->
+                            <GridViewColumn Header="Dateiname" Width="200"
+                        DisplayMemberBinding="{Binding FileName}"/>
+
+                            <!-- Spalte 3: Dateityp -->
+                            <GridViewColumn Header="Typ" Width="80"
+                        DisplayMemberBinding="{Binding FileType}"/>
+
+                            <!-- Spalte 4: Größe -->
+                            <GridViewColumn Header="Größe" Width="100"
+                        DisplayMemberBinding="{Binding FileSize}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Button Content="Start" Grid.Row="3" HorizontalAlignment="Right" Margin="10" Width="50" x:Name="startButton" Click="startButton_Click"/>
+        </Grid>
 
     </Grid>
 </Window>
