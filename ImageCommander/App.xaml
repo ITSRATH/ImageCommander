@@ -4,6 +4,24 @@
              xmlns:local="clr-namespace:ImageCommander"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Simple vector icon used for application windows (DrawingImage so no external file needed) -->
+        <DrawingImage x:Key="AppIcon">
+            <DrawingImage.Drawing>
+                <DrawingGroup>
+                    <!-- background square -->
+                    <GeometryDrawing Brush="#FF0078D7" Geometry="M0,0 L32,0 32,32 0,32 Z" />
+
+                    <!-- camera top bar -->
+                    <GeometryDrawing Brush="White" Geometry="M6,8 L26,8 26,14 6,14 Z" />
+
+                    <!-- lens circle -->
+                    <GeometryDrawing Brush="#FFFFFFFF">
+                        <GeometryDrawing.Geometry>
+                            <EllipseGeometry Center="16,20" RadiusX="6" RadiusY="6" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
     </Application.Resources>
 </Application>
