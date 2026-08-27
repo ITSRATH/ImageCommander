@@ -133,7 +133,7 @@
                         <RadioButton Content="Nein" GroupName="setRemoveMeta" IsChecked="True" VerticalAlignment="Center" Margin="6,0,0,0"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <Label Content="Ergebniss in zip packen:" VerticalAlignment="Center"/>
+                        <Label Content="Ergebnis in zip packen:" VerticalAlignment="Center"/>
                         <CheckBox x:Name="zipAfterConvert" VerticalAlignment="Center" ToolTip="Alle konvertierten Dateien in eine ZIP-Datei packen"/>
                     </StackPanel>
                 </StackPanel>
